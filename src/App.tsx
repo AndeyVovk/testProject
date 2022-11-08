@@ -1,26 +1,52 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import HeaderComponent from "./components/components/general-header/header.component";
+import {createBrowserRouter, Outlet, RouterProvider, Navigate, Routes, Route} from "react-router-dom";
+import {SecondComponent} from "./components/components/review-module";
+import FirstPage from "./components/components/main-page/main-page";
+
+const router = createBrowserRouter([
+    {
+        path: "/",
+        element: <Root/>,
+        children: [
+            {
+                path: "second",
+                element: <SecondComponent/>
+            },
+            {
+                path: "main",
+                element: <FirstPage/>,
+            },
+        ]
+    },
+
+]);
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+    return (
+        <div className="App">
+            <RouterProvider router={router}/>
+        </div>
+    );
+}
+
+function Root() {
+    // @ts-ignore
+    return (
+        <div className="App">
+            <HeaderComponent/>
+            <Routes>
+                <Route
+                    path="/"
+                    element={[
+                        <FirstPage/> ]}
+                />
+            </Routes>
+            <Outlet/>
+        </div>
+    );
 }
 
 export default App;
