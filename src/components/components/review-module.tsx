@@ -11,29 +11,50 @@ export function SecondComponent(): ReactElement {
     let storeData = JSON.parse(localStorage.getItem('stacks'));
     const [panels, onKeyDown] = usePanels({
         idPrefix: "simple-panels",
-        count: storeData.length,
+        count: storeData?.length,
         defaultExpandedIndex: 0,
     });
+    console.log(storeData)
     return (
         <React.Fragment key={panels.length}>
             <Configuration>
                 <div className="module">
                     <ExpansionList onKeyDown={onKeyDown} className="module__grid">
                         <div>
-                            {storeData.map((v: Stack, i: number) => {
+                            {storeData.map((stack: Stack, i: number) => {
                                 return <ExpansionPanel
                                     {...panels[i]}
-                                    id={v.id}
-                                    key={v.id}
-                                    header={v.data.text}
+                                    key={stack.id}
+                                    header={stack.data.text}
                                     disablePadding
                                 >
                                     <Grid columns={1} className="module__view-module-grid"
-                                          id={v.id}>
+                                          id={stack.id}>
                                         {
-                                            v.data.module?.map((module: Module) =>
-                                                <span key={module.text} className="module_name">{module.text}</span>
+                                            stack.data.module?.map((module: any) => {
+                                              return  <ExpansionPanel
+                                                    {...panels[i]}
+                                                    key={module.text}
+                                                    header={module.text}
+                                                    disablePadding
+                                                >
+                                                    <Grid columns={1} className="module__view-module-grid"
+                                                          id={stack.id}>
+                                                        {
+                                                            module.module?.map((module: any) => {
+                                                                    return <span key={module.text}
+                                                                                 className="module_name">{module.text}</span>
+
+                                                                }
+                                                            )
+
+                                                        }
+                                                    </Grid>
+                                                </ExpansionPanel>
+
+                                                }
                                             )
+
                                         }
                                     </Grid>
                                 </ExpansionPanel>

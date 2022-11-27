@@ -6,7 +6,8 @@ const persistedTodosString = localStorage.getItem('todos')
 
 if (persistedTodosString) {
     preloadedState = {
-        stacks: JSON.parse(persistedTodosString)
+        stacks: JSON.parse(persistedTodosString),
+        filters: JSON.parse(persistedTodosString)
     }
 }
 

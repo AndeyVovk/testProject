@@ -6,7 +6,7 @@ export enum General {
 
 // @ts-ignore
 const stack = JSON.parse(localStorage.getItem('stacks'))
-const initialState: Stack[] = [
+const initialState: any[] = [
     {
         id: '0',
         data:
@@ -14,13 +14,22 @@ const initialState: Stack[] = [
                 text: 'js Software Engineering',
                 module: [
                     {
-                        text: 'react'
+                        text: 'react',
+                        module: [{
+                            text: 'tests'
+                        }]
                     },
                     {
-                        text: 'vue'
+                        text: 'vue',
+                        module: [{
+                            text: 'tests'
+                        }]
                     },
                     {
-                        text: 'angular'
+                        text: 'angular',
+                        module: [{
+                            text: 'tests'
+                        }]
                     }]
             }
     },
@@ -32,13 +41,22 @@ const initialState: Stack[] = [
                 text: 'Front End Learn',
                 module: [
                     {
-                        text: 'react'
+                        text: 'react',
+                        module: [{
+                            text: 'tests'
+                        }]
                     },
                     {
-                        text: 'vue'
+                        text: 'vue',
+                        module: [{
+                            text: 'tests'
+                        }]
                     },
                     {
-                        text: 'angular'
+                        text: 'angular',
+                        module: [{
+                            text: 'tests'
+                        }]
                     }]
             }
     },
@@ -49,13 +67,22 @@ const initialState: Stack[] = [
                 text: 'FrontEndSoft',
                 module: [
                     {
-                        text: 'react'
+                        text: 'react',
+                        module: [{
+                            text: 'tests'
+                        }]
                     },
                     {
-                        text: 'vue'
+                        text: 'vue',
+                        module: [{
+                            text: 'tests'
+                        }]
                     },
                     {
-                        text: 'angular'
+                        text: 'angular',
+                        module: [{
+                            text: 'tests'
+                        }]
                     }]
             }
     }
@@ -68,9 +95,9 @@ function nextTodoId(todos: any) {
 
 
 export default function todosReducer(state: Stack[] = stack ? stack : initialState, action: any) {
+    console.log(state)
     switch (action.type) {
         case General.module: {
-
             const result = [
                 ...state,
                 {
@@ -85,6 +112,7 @@ export default function todosReducer(state: Stack[] = stack ? stack : initialSta
             return result
         }
         default:
+            localStorage.setItem('stacks', JSON.stringify(state))
             return state
     }
 }

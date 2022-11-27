@@ -1,9 +1,9 @@
 import React from 'react';
 import './App.css';
-import HeaderComponent from "./components/components/general-header/header.component";
-import {createBrowserRouter, Outlet, RouterProvider, Navigate, Routes, Route} from "react-router-dom";
+import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import {SecondComponent} from "./components/components/review-module";
 import FirstPage from "./components/components/main-page/main-page";
+import {Root} from "./components/components/root.component";
 
 const router = createBrowserRouter([
     {
@@ -32,21 +32,5 @@ function App() {
     );
 }
 
-function Root() {
-    // @ts-ignore
-    return (
-        <div className="App">
-            <HeaderComponent/>
-            <Routes>
-                <Route
-                    path="/"
-                    element={[
-                        <FirstPage/> ]}
-                />
-            </Routes>
-            <Outlet/>
-        </div>
-    );
-}
 
 export default App;

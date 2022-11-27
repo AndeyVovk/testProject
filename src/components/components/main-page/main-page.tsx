@@ -1,4 +1,3 @@
-import {useCallback} from "react";
 import * as React from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -7,7 +6,6 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import {DataSelect} from "../../modal-components/data-select";
 
 
 export default function FirstPage() {
@@ -28,6 +26,15 @@ export default function FirstPage() {
             SDLC
         };
     }
+
+    const nameSpecializations = [
+        {name: 'Software Engineering(Specialization)'},
+        {name: 'Software Engineering(General)'},
+        {name: 'Software Deployment'},
+        {name: 'Quality Assurance'},
+        {name: 'Software Design'},
+        {name: 'SDLC'},
+    ]
     const rows = [
         createData('React', 159, 6.0, 24, 4.0, 0),
         createData('Angular', 237, 9.0, 37, 4.3, 1),
@@ -42,28 +49,24 @@ export default function FirstPage() {
             <Table sx={{minWidth: 650}} aria-label="simple table">
                 <TableHead>
                     <TableRow>
-                        <TableCell align="right">Software Engineering(Specialization)</TableCell>
-                        <TableCell align="right">Software Engineering(General)</TableCell>
-                        <TableCell align="right">Software Deployment</TableCell>
-                        <TableCell align="right">Quality Assurance</TableCell>
-                        <TableCell align="right">Software Design</TableCell>
-                        <TableCell align="right">SDLC</TableCell>
+                        {nameSpecializations.map((value: { name: string }) =>
+                            <TableCell align="right">{value.name}</TableCell>)}
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {rows.map((row) => (
+                    {rows.map((row, index: number) => (
                         <TableRow
                             key={row.engineeringSpecialization}
                             sx={{'&:last-child td, &:last-child th': {border: 0}}}
                         >
-                            <TableCell component="th" scope="row">
+                            <TableCell key={index} component="th" scope="row">
                                 {row.engineeringSpecialization}
                             </TableCell>
-                            <TableCell align="right">{row.engineeringGeneral}</TableCell>
-                            <TableCell align="right">{row.softwareDeployment}</TableCell>
-                            <TableCell align="right">{row.qualityAssurance}</TableCell>
-                            <TableCell align="right">{row.softwareDesign}</TableCell>
-                            <TableCell align="right">{row.SDLC}</TableCell>
+                            <TableCell key={index} align="right">{row.engineeringGeneral}</TableCell>
+                            <TableCell key={index} align="right">{row.softwareDeployment}</TableCell>
+                            <TableCell key={index} align="right">{row.qualityAssurance}</TableCell>
+                            <TableCell key={index} align="right">{row.softwareDesign}</TableCell>
+                            <TableCell key={index} align="right">{row.SDLC}</TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
